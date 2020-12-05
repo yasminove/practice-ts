@@ -45,15 +45,15 @@
 
 // greetWorld.greet()
 
-class Person {
-    constructor(public firstName: string,  public lastName: string){
-        console.log(`Hello ${this.firstName} ${this.lastName}`); 
-    }
+// class Person {
+//     constructor(public firstName: string,  public lastName: string){
+//         console.log(`Hello ${this.firstName} ${this.lastName}`); 
+//     }
 
-    describe(){
-        console.log(`This iszzzz ${this.firstName} ${this.lastName}`);
-    }
-}
+//     describe(){
+//         console.log(`This iszzzz ${this.firstName} ${this.lastName}`);
+//     }
+// }
 
 // let john = new Person('john', 'doe');
 // john.describe()
@@ -74,6 +74,118 @@ class Person {
 // console.log(developer.describe());
 
 
+// class Person {
+//     private _name: string
+
+//     get name(){
+//         return this._name
+//     }
+
+//     set name (theName){
+//         if(theName.length < 3){
+//             console.log('name cannot be shorter than three'); 
+//         } else {
+//             console.log(`hi long name ${theName} your name is ${theName.length} long!`);
+//         }
+        
+//         this._name = theName
+        
+//     }
+ 
+// }
+
+// let john = new Person();
+// john.name = "jo"
+// console.log(john.name, 'ppp');
+
+// john.name;
+
+// john.name = 'john'
 
 
+// console.log(john.name, 'john.name');
+
+
+// console.log(john.name, 'here');
+
+
+
+// console.log(john);
+
+// const fullNameMaxLength = 10;
+
+// class Employee {
+//   private _fullName: string = "";
+
+//   get fullName(): string {
+//     return this._fullName;
+//   }
+
+//   set fullName(newName: string) {
+//     if (newName && newName.length > fullNameMaxLength) {
+//       throw new Error("fullName has a max length of " + fullNameMaxLength);
+//     }
+
+//     this._fullName = newName;
+//   }
+// }
+
+// let employee = new Employee();
+// employee.fullName = "yasmin";
+
+
+// console.log(employee.fullName, 'employee.fullName');
+
+// if (employee.fullName) {
+//   console.log(employee.fullName);
+// }
+
+
+
+// class Grid {
+//     static origin = { x: 0, y: 0 };
+  
+//     calculateDistanceFromOrigin(point: { x: number; y: number }) {
+//       let xDist = point.x - Grid.origin.x;
+//       let yDist = point.y - Grid.origin.y;
+//       return Math.sqrt(xDist * xDist + yDist * yDist) / this.scale;
+//     }
+  
+//     constructor(public scale: number) {}
+//   }
+  
+//   let grid1 = new Grid(1.0); // 1x scale
+//   let grid2 = new Grid(5.0); // 5x scale
+  
+//   console.log(grid1.calculateDistanceFromOrigin({ x: 10, y: 10 }));
+//   console.log(grid2.calculateDistanceFromOrigin({ x: 10, y: 10 }));
+
+abstract class Department {
+    constructor(public name: string) {}
+  
+    printName(): void {
+      console.log("Department name: " + this.name);
+    }
+  
+    abstract printMeeting(): void; // must be implemented in derived classes
+  }
+  
+  class AccountingDepartment extends Department {
+    constructor() {
+      super("Accounting and Auditing"); // constructors in derived classes must call super()
+    }
+  
+    printMeeting(): void {
+      console.log("The Accounting Department meets each Monday at 10am.");
+    }
+  
+    generateReports(): void {
+      console.log("Generating accounting reports...");
+    }
+  }
+
+var department = new AccountingDepartment(); // ok to create and assign a non-abstract subclass
+department.printName();
+department.printMeeting();
+department.generateReports();
 
