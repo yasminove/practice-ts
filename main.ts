@@ -160,32 +160,67 @@
 //   console.log(grid1.calculateDistanceFromOrigin({ x: 10, y: 10 }));
 //   console.log(grid2.calculateDistanceFromOrigin({ x: 10, y: 10 }));
 
-abstract class Department {
-    constructor(public name: string) {}
+// abstract class Department {
+//     constructor(public name: string) {}
   
-    printName(): void {
-      console.log("Department name: " + this.name);
-    }
+//     printName(): void {
+//       console.log("Department name: " + this.name);
+//     }
   
-    abstract printMeeting(): void; // must be implemented in derived classes
-  }
+//     abstract printMeeting(): void; // must be implemented in derived classes
+//   }
   
-  class AccountingDepartment extends Department {
-    constructor() {
-      super("Accounting and Auditing"); // constructors in derived classes must call super()
-    }
+//   class AccountingDepartment extends Department {
+//     constructor() {
+//       super("Accounting and Auditing"); // constructors in derived classes must call super()
+//     }
   
-    printMeeting(): void {
-      console.log("The Accounting Department meets each Monday at 10am.");
-    }
+//     printMeeting(): void {
+//       console.log("The Accounting Department meets each Monday at 10am.");
+//     }
   
-    generateReports(): void {
-      console.log("Generating accounting reports...");
-    }
-  }
+//     generateReports(): void {
+//       console.log("Generating accounting reports...");
+//     }
+//   }
 
-var department = new AccountingDepartment(); // ok to create and assign a non-abstract subclass
-department.printName();
-department.printMeeting();
-department.generateReports();
+// var department = new AccountingDepartment(); // ok to create and assign a non-abstract subclass
+// department.printName();
+// department.printMeeting();
+// department.generateReports();
 
+
+interface StringValidator {
+  isAcceptable(s: string): boolean;
+}
+
+let lettersRegexp = /^[A-Za-z]+$/;
+let numberRegexp = /^[0-9]+$/;
+
+class LettersOnlyValidator implements StringValidator {
+  isAcceptable(s: string) {
+    return lettersRegexp.test(s);
+  }
+}
+
+class ZipCodeValidator implements StringValidator {
+  isAcceptable(s: string) {
+    return s.length === 5 && numberRegexp.test(s);
+  }
+}
+
+// Some samples to try
+let strings = ["Hello", "98052", "101"];
+
+// Validators to use
+let validators: { [s: string]: StringValidator } = {};
+validators["ZIP code"] = new ZipCodeValidator();
+validators["Letters only"] = new LettersOnlyValidator();
+
+// Show whether each string passed each validator
+for (let s of strings) {
+  for (let name in validators) {
+    let isMatch = validators[name].isAcceptable(s);
+    console.log(`'${s}' ${isMatch ? "matches" : "does not match"} '${name}'.`);
+  }
+}
